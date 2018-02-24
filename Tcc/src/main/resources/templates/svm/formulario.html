@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/template">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+<script type="text/javascript">
+	function cidade(IdEstado){		
+		$("#imgCarregando").removeClass('esconder');
+		$("#imgCarregando").addClass('mostrar');		
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "/projetoA/SVM/cidades",
+			data : JSON.stringify({id:IdEstado,nome:"u",sigla:"u",regiao:"u"}),	
+			dataType : 'text',
+			timeout : 100000,
+			success : function(data) {
+				$("#selCidade").html(data);				
+				$("#imgCarregando").removeClass('mostrar');
+				$("#imgCarregando").addClass('esconder');
+				
+			},
+			
+			error : function(e) {
+				console.log("ERROR: ", e);				
+			},
+			done : function(e) {
+				console.log("DONE");
+			}									
+		});
+	}
+
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#selRequisitoCargo").select2();
+});
+
+$(function() {
+	$("#selDisciplina").select2();
+});
+
+$(function() {
+	$("#selEstado").select2();
+});
+
+$(function() {
+	$("#selCidade").select2();
+});
+
+</script>
+<link th:href="@{/layout/css/style.css}"
+	rel="stylesheet" />
+</head>
+<body>
+	<div class="container" layout:fragment="conteudo">
+		<fieldset> 
+			<legend>Seleção de Editais</legend>		
+			<form action="buscar" id="formSvm" th:object="${formParametro}" name="formSvm" role="form" method="post" >									
+				<div class="row">					
+					<div class="col-xs-4">
+						<label
+						for="selSalario">Salário</label> 
+						<select required="true" id="selSalario" name="selSalario" class="form-control" th:field="*{idQuartil}" >
+							<option value=""></option>
+							<option th:each="quartilSalario : ${quartisSalarios}" th:value="${quartilSalario.id}" th:text="${'R$ '+ #numbers.formatDecimal(quartilSalario.de,1,2,'COMMA') +' '+ quartilSalario.separador +' '+ 'R$ '+ #numbers.formatDecimal(quartilSalario.ate,1,2,'COMMA')}" /> 
+						</select>
+					</div>									
+					<div class="col-xs-2">
+						<label for="selEscolaridade">
+						Escolaridade
+						</label> 
+						<select required="true" id="selEscolaridade"
+						name="selEscolaridade" class="form-control" th:field="*{idEscolaridade}">
+							<option value=""></option>
+							<option th:each="escolaridade : ${escolaridades}" th:value="${escolaridade.id}" th:text="${escolaridade.nome}"/>																																
+						</select>
+					</div>													
+					<div class="col-xs-2">					 	
+					 	<label for="selEsfera">Esfera do cargo</label> 
+					 	<select required="true" id="selEsfera" name="selEsfera" class="form-control" th:field="*{idEsfera}" >
+							<option value=""></option>
+							<option th:each="esfera : ${esferas}" th:value="${esfera.id}" th:text="${esfera.nome}"/>
+						</select> 
+					</div>						
+					<div class="col-xs-4">					 	
+					 	<label for="selArea">Área</label> 
+					 	<select required="true" id="selArea" name="selArea" class="form-control" th:field="*{idArea}" >
+							<option value=""></option>
+							<option th:each="area : ${areas}" th:value="${area.id}" th:text="${area.nome}"/>
+						</select> 
+					</div>
+				</div>							
+				<br />
+				<div class="row">				
+					<div class="col-xs-3">						
+						<label for="selEstado">Estado</label> 
+						<select required="true" id="selEstado" name="selEstado" class="form-control" onchange="cidade(this.value);" th:field="*{idEstado}">
+							<option value=""></option>
+							<option th:each="estado : ${estados}" th:value="${estado.id}" th:text="${estado.nome}"/>
+						</select>
+					</div>
+					<img id="imgCarregando" th:src="@{/layout/img/carregando.gif}" class="esconder" />				
+					<div class="col-xs-4">
+						<label for="selCidade">Cidade</label> 				
+						<select required="true" id="selCidade" name="selCidade" class="form-control" th:field="*{idCidade}" > 								
+						</select>
+					</div>				
+					<div class="col-xs-5">
+						<label for="txtDisciplina">Disciplina</label> 
+						<select required="true" id="selDisciplina" name="selDisciplina" class="form-control" th:field="*{idDisciplina}">
+							<option value=""></option>
+							<option th:each="disciplina : ${disciplinas}" th:value="${disciplina.id}" th:text="${disciplina.nome}"/>
+						</select>						
+					</div>				
+				</div>	
+				<br />								
+				<div class="form-group">	
+					<div class="col-xs-13">					 	
+					 	<label for="selRequisitoCargo">Requisito Cargo</label> 
+					 	<select required="true" id="selRequisitoCargo" name="selRequisitoCargo" class="form-control selectpicker" th:field="*{idRequisitoCargo}" data-live-search="true" >
+							<option value=""></option>
+							<option th:each="requisitoCargo : ${requisitosCargos}" th:value="${requisitoCargo.id}" th:text="${requisitoCargo.nome}"/>
+						</select> 
+					</div>
+				</div>																			
+				<input type="submit" value="Selecionar" id="btnEncontrar" class="btn btn-success" name="btnEncontrar" />				
+			</form>		
+		</fieldset>
+	</div>
+</body>
+</html>

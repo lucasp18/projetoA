@@ -1,0 +1,32 @@
+@CHARSET "ISO-8859-1";
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 220px;
+	height: 246px;
+	background-color: gold;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+#edital_img{
+	display: block;
+	margin:auto;
+	width:80%;
+}
+
+#txt_edital {
+	overflow-wrap: break-word;
+	margin:28px 0 10px;
+	font-weight: bold;
+	color:black;
+}
+
+.container_img {
+    padding: 2px 16px;
+	background-color: whitesmoke;
+}
+

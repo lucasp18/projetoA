@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/template">
+	
+	<div th:fragment="cidadesFragmento" th:with="valor='teste'" th:unless="${#lists.isEmpty(cidades)}" id="results-block" th:remove="tag">
+			<option value="" />
+			<option th:each="cidade : ${cidades}" th:value="${cidade.id}" th:text="${cidade.nome}" />			
+	</div>
+
+</html>

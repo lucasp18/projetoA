@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/template">
+<head>
+<link th:href="@{/layout/css/profile_edital.css}"
+	rel="stylesheet" />
+<meta charset="utf-8" />
+<title>Insert title here</title>
+</head>
+<body>
+		
+		
+			<div class="container" layout:fragment="conteudo">
+				<div class="col-md-3" th:if="${resultados != null}" th:each="resultado : ${resultados}" th:include="svm/profile_edital">									
+						       				    		
+				</div>
+			</div>
+		
+		
+		<h1 th:if="${resultados == null}" >Nenhum edital encontrado :( </h1>
+		
+</body>
+</html>

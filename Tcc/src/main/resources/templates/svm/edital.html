@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/template">
+<head>
+<meta charset="utf-8" />
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container" layout:fragment="conteudo">
+<h1 th:text="${'Id Edital: ' + edital.getId()}"></h1>
+<h1 th:text="${'Nome Edital: ' + edital.getTitulo()}"></h1>
+
+<fieldset><legend>Disciplinas:</legend>
+<div  th:each="disciplina : ${disciplinas}">									
+	<p th:text="${disciplina}"></p>	
+</div>
+</fieldset>
+<fieldset><legend>Esfera:</legend>
+	<p th:text="${esfera}"></p>	
+</fieldset>
+<fieldset><legend>Salários:</legend>
+	<div  th:each="salario : ${salarios}">									
+	<p th:text="${'R$ ' + salario}"></p>	
+</div>	
+</fieldset>
+<fieldset><legend>Áreas:</legend>
+	<div  th:each="area : ${areas}">									
+	<p th:text="${area}"></p>	
+</div>	
+</fieldset>
+<fieldset><legend>Cidades:</legend>
+	<div  th:each="cidade : ${cidades}">									
+	<p th:text="${cidade}"></p>	
+</div>	
+</fieldset>
+<fieldset><legend>Escolaridades:</legend>
+	<div  th:each="escolaridade : ${escolaridades}">									
+	<p th:text="${escolaridade}"></p>	
+</div>	
+</fieldset>
+<fieldset><legend>Requisitos dos Cargos:</legend>
+	<div  th:each="requisitoCargo : ${requisitosCargos}">									
+	<p th:text="${requisitoCargo}"></p>	
+</div>	
+</fieldset>
+
+</div>
+</body>
+</html>

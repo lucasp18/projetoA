@@ -1,0 +1,11 @@
+<div class="card">
+  <a th:href="@{/projetoA/SVM/{id}/editais(id = ${resultado.getId()}) }" target="_blank">
+  <img id="edital_img" th:src="@{/layout/img/edital_3.jpg}" alt="Edital" /> 
+  <div class="container_img">
+    <p id="txt_edital" th:text="${'Edital: ' + resultado.getTitulo()}"></p>     
+  </div>
+  </a>	
+</div>
+<br />
+<br />
+<br />
